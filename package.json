@@ -1,29 +1,31 @@
 {
-	"name": "data-structure",
-	"module": "index.ts",
-	"type": "module",
-	"scripts": {
-		"commit": "cz",
-		"linting": "eslint . --fix --ext .ts"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "^19.0.2",
-		"@commitlint/config-conventional": "^19.0.0",
-		"@types/bun": "latest",
-		"@typescript-eslint/eslint-plugin": "^6.0.0",
-		"@typescript-eslint/parser": "^6.0.0",
-		"commitizen": "^4.3.0",
-		"eslint": "^8.57.0",
-		"eslint-config-airbnb-typescript": "^17.1.0",
-		"husky": "^9.0.11",
-		"lint-staged": "^15.2.2"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	},
-	"husky": {
-		"hooks": {
-			"commit-msg": "bun commitlint --edit $1"
-		}
-	}
+  "name": "data-structure",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "commit": "cz",
+    "linting": "eslint . --fix --ext .ts",
+    "formatting": "npx prettier . --write"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.2",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "commitizen": "^4.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "bun commitlint --edit $1"
+    }
+  }
 }
