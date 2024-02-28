@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "commit": "cz",
+    "test:unit": "bun test",
     "linting": "eslint . --fix --ext .ts",
     "formatting": "npx prettier . --write"
   },

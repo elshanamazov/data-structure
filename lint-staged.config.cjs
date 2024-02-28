@@ -1,3 +1,3 @@
 module.exports = {
-	'*.ts': ['bun linting', 'bun formatting'],
+  '*.ts': ['bun linting', 'bun formatting'],
 };

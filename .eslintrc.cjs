@@ -1,9 +1,10 @@
 module.exports = {
-  extends: ["airbnb-base", "airbnb-typescript/base"],
+  extends: ['airbnb-base', 'airbnb-typescript/base'],
   parserOptions: {
-    project: "./tsconfig.json",
+    project: './tsconfig.json',
   },
   rules: {
-    "no-console": 2,
+    'no-console': 2,
+    'import/prefer-default-export': 0,
   },
 };
