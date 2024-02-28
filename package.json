@@ -1,11 +1,22 @@
 {
   "name": "data-structure",
   "module": "index.ts",
-  "type": "module",
   "devDependencies": {
+    "@commitlint/cli": "^19.0.2",
+    "@commitlint/config-conventional": "^19.0.0",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "husky": "^9.0.11",
+    "init": "^0.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "bun commitlint --edit $1"
+    }
   }
 }
