@@ -23,10 +23,5 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "bun commitlint --edit $1"
-    }
   }
 }
