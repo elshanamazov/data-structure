@@ -5,5 +5,21 @@ export class SinglyLinkedList {
 
   tail: LinkedListNode | null = null;
 
-  size = 0;
+  size: number = 0;
+
+  append(data: any) {
+    const newNode = new LinkedListNode(data);
+
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail!.next = newNode;
+      this.tail = newNode;
+    }
+
+    this.size += 1;
+
+    return this;
+  }
 }

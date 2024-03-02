@@ -1,7 +1,7 @@
 export class LinkedListNode {
   data: any;
 
-  next: any;
+  next: LinkedListNode | null;
 
   constructor(data: any) {
     this.data = data;
