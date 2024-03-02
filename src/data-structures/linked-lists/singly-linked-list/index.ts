@@ -7,7 +7,7 @@ export class SinglyLinkedList {
 
   size: number = 0;
 
-  append(data: any) {
+  push(data: any) {
     const newNode = new LinkedListNode(data);
 
     if (this.head === null) {
@@ -21,5 +21,58 @@ export class SinglyLinkedList {
     this.size += 1;
 
     return this;
+  }
+
+  unshift(data: any) {
+    const newNode = new LinkedListNode(data);
+
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.size += 1;
+    return this;
+  }
+
+  pop() {
+    if (!this.head) return undefined;
+
+    let temp = this.head;
+    let prev = this.head;
+
+    while (temp.next) {
+      prev = temp;
+      temp = temp.next;
+    }
+
+    this.tail = prev;
+    this.tail.next = null;
+    this.size -= 1;
+
+    if (this.size === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return temp;
+  }
+
+  shift() {
+    if (!this.head) return undefined;
+
+    const temp = this.head;
+    this.head = this.head.next;
+    temp.next = null;
+    this.size -= 1;
+
+    if (this.size === 0) {
+      this.tail = null;
+    }
+
+    return temp;
   }
 }
