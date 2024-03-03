@@ -9,7 +9,6 @@ describe('SinglyLinkedList', () => {
     linkedList = new SinglyLinkedList();
   });
 
-  // Test for creating a linked list
   test('should create linked list', () => {
     expect(linkedList).toBeDefined();
   });
@@ -106,6 +105,34 @@ describe('SinglyLinkedList', () => {
       expect(linkedList.head?.data).toBe(2);
       expect(linkedList.head?.next?.data).toBe(3);
       expect(linkedList.size).toBe(2);
+    });
+  });
+
+  describe('get', () => {
+    test('should get node by index', () => {
+      linkedList.push(1).push(2).push(3);
+
+      expect(linkedList.get(2)?.data).toBe(3);
+      expect(linkedList.get(1)?.data).toBe(2);
+    });
+
+    test('should return undefined for out-of-range index', () => {
+      linkedList.push(1).push(2).push(3);
+
+      expect(linkedList.get(-1)).toBeUndefined();
+      expect(linkedList.get(3)).toBeUndefined();
+    });
+  });
+
+  describe('set', () => {
+    test('should set value node by index', () => {
+      linkedList.push(1).push(2).push(3);
+      expect(linkedList.set(1, 4)).toBeTrue();
+    });
+
+    test('should set value node by index for out-of-range', () => {
+      linkedList.push(1).push(2).push(3);
+      expect(linkedList.set(-1, 3)).toBeFalse();
     });
   });
 });

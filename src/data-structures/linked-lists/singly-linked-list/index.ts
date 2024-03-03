@@ -75,4 +75,26 @@ export class SinglyLinkedList {
 
     return temp;
   }
+
+  get(index: number) {
+    if (index < 0 || index >= this.size) return undefined;
+    let temp = this.head;
+
+    for (let i = 0; i < index; i += 1) {
+      temp = temp!.next;
+    }
+
+    return temp;
+  }
+
+  set(index: number, newData: any) {
+    const temp = this.get(index);
+
+    if (temp) {
+      temp.data = newData;
+      return true;
+    }
+
+    return false;
+  }
 }
