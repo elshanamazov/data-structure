@@ -135,4 +135,26 @@ describe('SinglyLinkedList', () => {
       expect(linkedList.set(-1, 3)).toBeFalse();
     });
   });
+
+  describe('insert', () => {
+    test('should insert a new node into the list', () => {
+      linkedList.push(0).push(2).push(3);
+
+      expect(linkedList.insert(2, 4)).toBeTrue();
+      expect(linkedList.size).toBe(4);
+      expect(linkedList.get(0)?.data).toBe(0);
+      expect(linkedList.get(1)?.data).toBe(2);
+      expect(linkedList.get(2)?.data).toBe(4);
+      expect(linkedList.get(3)?.data).toBe(3);
+    });
+
+    test('should insert a new node into the empty list', () => {
+      linkedList.insert(0, 1);
+
+      expect(linkedList.size).toBe(1);
+      expect(linkedList.head?.data).toBe(1);
+      expect(linkedList.tail?.data).toBe(1);
+      expect(linkedList.head).toEqual(linkedList.tail);
+    });
+  });
 });

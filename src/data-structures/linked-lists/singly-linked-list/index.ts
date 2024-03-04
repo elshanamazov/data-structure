@@ -97,4 +97,19 @@ export class SinglyLinkedList {
 
     return false;
   }
+
+  insert(index: number, value: any) {
+    if (index === 0) return this.unshift(value);
+    if (index === this.size) return this.push(value);
+    if (index < 0 || index > this.size) return false;
+
+    const temp = this.get(index - 1);
+    const newNode = new LinkedListNode(value);
+
+    newNode.next = temp!.next;
+    temp!.next = newNode;
+    this.size += 1;
+
+    return true;
+  }
 }
