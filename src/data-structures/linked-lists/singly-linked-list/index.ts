@@ -112,4 +112,19 @@ export class SinglyLinkedList {
 
     return true;
   }
+
+  remove(index: number) {
+    if (index === 0) return this.shift();
+    if (index === this.size - 1) return this.pop();
+    if (index < 0 || index > this.size - 1) return undefined;
+
+    const before = this.get(index - 1);
+    let toDeleteNode = before!.next;
+
+    before!.next = before!.next!.next;
+    toDeleteNode = null;
+    this.size -= 1;
+
+    return toDeleteNode;
+  }
 }

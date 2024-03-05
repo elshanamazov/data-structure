@@ -157,4 +157,20 @@ describe('SinglyLinkedList', () => {
       expect(linkedList.head).toEqual(linkedList.tail);
     });
   });
+
+  describe('remove', () => {
+    test('should remove node by index from the list ', () => {
+      linkedList.push(1).push(2).push(3);
+      linkedList.remove(1);
+
+      expect(linkedList.size).toBe(2);
+      expect(linkedList.get(0)?.data).toBe(1);
+      expect(linkedList.get(1)?.data).toBe(3);
+    });
+
+    test('should return undefined from out-of-range index', () => {
+      linkedList.push(1).push(2).push(3);
+      expect(linkedList.remove(4)).toBeUndefined();
+    });
+  });
 });
