@@ -6,7 +6,8 @@
     "commit": "cz",
     "test:unit": "bun test",
     "linting": "eslint . --fix --ext .ts",
-    "formatting": "npx prettier . --write"
+    "formatting": "npx prettier . --write",
+    "watch": "tsc --watch"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.2",
@@ -19,7 +20,9 @@
     "eslint-config-airbnb-typescript": "^17.1.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5"
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
