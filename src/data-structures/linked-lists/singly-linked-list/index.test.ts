@@ -173,4 +173,31 @@ describe('SinglyLinkedList', () => {
       expect(linkedList.remove(4)).toBeUndefined();
     });
   });
+
+  describe('reverse', () => {
+    test('should reverse a list', () => {
+      linkedList.push(1).push(2).push(3);
+      linkedList.reverse();
+
+      expect(linkedList.head?.data).toBe(3);
+      expect(linkedList.get(1)?.data).toBe(2);
+      expect(linkedList.tail?.data).toBe(1);
+    });
+
+    test('should handle a single node', () => {
+      linkedList.push(1);
+      linkedList.reverse();
+
+      expect(linkedList.head?.data).toBe(1);
+      expect(linkedList.tail?.data).toBe(1);
+      expect(linkedList.head).toBe(linkedList.tail);
+    });
+
+    test('should handle an empty list ', () => {
+      linkedList.reverse();
+
+      expect(linkedList.head).toBeNull();
+      expect(linkedList.tail).toBeNull();
+    });
+  });
 });
