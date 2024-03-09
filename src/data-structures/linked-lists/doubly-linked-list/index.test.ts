@@ -12,4 +12,24 @@ describe('DoublyLinkedList', () => {
   test('should create doubly linked list', () => {
     expect(doublyLinkedList).toBeDefined();
   });
+
+  describe('push', () => {
+    test('should add node in the end of the empty doubly-list', () => {
+      doublyLinkedList.push(1);
+
+      expect(doublyLinkedList.head?.data).toBe(1);
+      expect(doublyLinkedList.tail?.data).toBe(1);
+      expect(doublyLinkedList.size).toBe(1);
+    });
+
+    test('should add multiple nodes in the end of doubly-list', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+
+      expect(doublyLinkedList.head?.data).toBe(1);
+      expect(doublyLinkedList.head?.next?.data).toBe(2);
+      expect(doublyLinkedList.tail?.data).toBe(3);
+      expect(doublyLinkedList.tail?.prev?.data).toBe(2);
+      expect(doublyLinkedList.size).toBe(3);
+    });
+  });
 });
