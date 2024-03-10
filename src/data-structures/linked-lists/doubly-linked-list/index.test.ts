@@ -32,4 +32,28 @@ describe('DoublyLinkedList', () => {
       expect(doublyLinkedList.size).toBe(3);
     });
   });
+
+  describe('pop', () => {
+    test('should return undefined from empty DLL', () => {
+      expect(doublyLinkedList.pop()).toBeUndefined();
+    });
+
+    test('should remove the node from the end of a DLL with only one node', () => {
+      doublyLinkedList.push(1);
+      doublyLinkedList.pop();
+      expect(doublyLinkedList.head).toBeNull();
+      expect(doublyLinkedList.tail).toBeNull();
+      expect(doublyLinkedList.size).toBe(0);
+    });
+
+    test('should remove the node from the end of a DLL with multiple nodes', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      doublyLinkedList.pop();
+
+      expect(doublyLinkedList.tail?.data).toBe(2);
+      expect(doublyLinkedList.tail?.next).toBeNull();
+      expect(doublyLinkedList.tail?.prev?.data).toBe(1);
+      expect(doublyLinkedList.size).toBe(2);
+    });
+  });
 });

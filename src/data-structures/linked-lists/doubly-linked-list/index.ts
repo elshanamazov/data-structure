@@ -5,7 +5,7 @@ export class DoublyLinkedList {
 
   tail: DoublyLinkedListNode | null;
 
-  size: number;
+  size: number = 0;
 
   constructor() {
     this.head = null;
@@ -27,5 +27,21 @@ export class DoublyLinkedList {
     this.size += 1;
 
     return this;
+  }
+
+  pop() {
+    if (!this.head) return undefined;
+    const temp = this.tail;
+    if (this.size === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = this.tail!.prev;
+      this.tail!.next = null;
+      temp!.prev = null;
+    }
+
+    this.size -= 1;
+    return temp;
   }
 }
