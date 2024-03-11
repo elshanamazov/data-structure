@@ -34,8 +34,8 @@ describe('DoublyLinkedList', () => {
   });
 
   describe('pop', () => {
-    test('should return undefined from empty DLL', () => {
-      expect(doublyLinkedList.pop()).toBeUndefined();
+    test('should return null from empty DLL', () => {
+      expect(doublyLinkedList.pop()).toBeNull();
     });
 
     test('should remove the node from the end of a DLL with only one node', () => {
@@ -53,6 +53,51 @@ describe('DoublyLinkedList', () => {
       expect(doublyLinkedList.tail?.data).toBe(2);
       expect(doublyLinkedList.tail?.next).toBeNull();
       expect(doublyLinkedList.tail?.prev?.data).toBe(1);
+      expect(doublyLinkedList.size).toBe(2);
+    });
+  });
+
+  describe('unshift', () => {
+    test('should add node in the beginning of the empty DLL', () => {
+      doublyLinkedList.unshift(1);
+
+      expect(doublyLinkedList.head?.data).toBe(1);
+      expect(doublyLinkedList.head?.prev).toBeNull();
+      expect(doublyLinkedList.tail?.data).toBe(1);
+      expect(doublyLinkedList.size).toBe(1);
+    });
+
+    test('should add multiple nodes in the beginning of DLL', () => {
+      doublyLinkedList.push(1).push(2).unshift(3);
+
+      expect(doublyLinkedList.head?.data).toBe(3);
+      expect(doublyLinkedList.head?.prev).toBeNull();
+      expect(doublyLinkedList.head?.next?.data).toBe(1);
+      expect(doublyLinkedList.tail?.data).toBe(2);
+      expect(doublyLinkedList.tail?.prev?.data).toBe(1);
+      expect(doublyLinkedList.size).toBe(3);
+    });
+  });
+
+  describe('shift', () => {
+    test('should return null from empty DLL', () => {
+      expect(doublyLinkedList.shift()).toBeNull();
+    });
+
+    test('should remove the node from the beginning of a DLL with only one node', () => {
+      doublyLinkedList.push(1);
+      doublyLinkedList.shift();
+      expect(doublyLinkedList.head).toBeNull();
+      expect(doublyLinkedList.tail).toBeNull();
+      expect(doublyLinkedList.size).toBe(0);
+    });
+
+    test('should remove the node from the beginning of a DLL with multiple nodes', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      doublyLinkedList.shift();
+
+      expect(doublyLinkedList.head?.data).toBe(2);
+      expect(doublyLinkedList.head?.prev).toBeNull();
       expect(doublyLinkedList.size).toBe(2);
     });
   });

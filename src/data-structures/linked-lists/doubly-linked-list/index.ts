@@ -1,17 +1,11 @@
-import { DoublyLinkedListNode } from '../doubly-list-node';
+import { DoublyLinkedListNode } from '../DoublyLinkedList';
 
 export class DoublyLinkedList {
-  head: DoublyLinkedListNode | null;
+  head: DoublyLinkedListNode | null = null;
 
-  tail: DoublyLinkedListNode | null;
+  tail: DoublyLinkedListNode | null = null;
 
   size: number = 0;
-
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
 
   push(data: any) {
     const newNode = new DoublyLinkedListNode(data);
@@ -30,7 +24,7 @@ export class DoublyLinkedList {
   }
 
   pop() {
-    if (!this.head) return undefined;
+    if (!this.head) return null;
     const temp = this.tail;
     if (this.size === 1) {
       this.head = null;
@@ -39,6 +33,40 @@ export class DoublyLinkedList {
       this.tail = this.tail!.prev;
       this.tail!.next = null;
       temp!.prev = null;
+    }
+
+    this.size -= 1;
+    return temp;
+  }
+
+  unshift(data: any) {
+    const newNode = new DoublyLinkedListNode(data);
+
+    if (this.size === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head!.prev = newNode;
+      this.head = newNode;
+    }
+
+    this.size += 1;
+
+    return this;
+  }
+
+  shift() {
+    if (!this.head) return null;
+    const temp = this.head;
+
+    if (this.size === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head?.next;
+      this.head!.prev = null;
+      temp.next = null;
     }
 
     this.size -= 1;
