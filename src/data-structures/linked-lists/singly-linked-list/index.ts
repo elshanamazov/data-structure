@@ -1,4 +1,4 @@
-import { LinkedListNode } from '../linked-list-node';
+import { LinkedListNode } from '../SinglyLinkedList';
 
 export class SinglyLinkedList {
   head: LinkedListNode | null = null;
@@ -39,7 +39,7 @@ export class SinglyLinkedList {
   }
 
   pop() {
-    if (!this.head) return undefined;
+    if (!this.head) return null;
 
     let temp = this.head;
     let prev = this.head;
@@ -62,7 +62,7 @@ export class SinglyLinkedList {
   }
 
   shift() {
-    if (!this.head) return undefined;
+    if (!this.head) return null;
 
     const temp = this.head;
     this.head = this.head.next;
@@ -77,7 +77,7 @@ export class SinglyLinkedList {
   }
 
   get(index: number) {
-    if (index < 0 || index >= this.size) return undefined;
+    if (index < 0 || index >= this.size) return null;
     let temp = this.head;
 
     for (let i = 0; i < index; i += 1) {
@@ -116,7 +116,7 @@ export class SinglyLinkedList {
   remove(index: number) {
     if (index === 0) return this.shift();
     if (index === this.size - 1) return this.pop();
-    if (index < 0 || index > this.size - 1) return undefined;
+    if (index < 0 || index > this.size - 1) return null;
 
     const before = this.get(index - 1);
     let toDeleteNode = before!.next;

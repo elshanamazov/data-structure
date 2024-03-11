@@ -116,11 +116,11 @@ describe('SinglyLinkedList', () => {
       expect(linkedList.get(1)?.data).toBe(2);
     });
 
-    test('should return undefined for out-of-range index', () => {
+    test('should return null for out-of-range index', () => {
       linkedList.push(1).push(2).push(3);
 
-      expect(linkedList.get(-1)).toBeUndefined();
-      expect(linkedList.get(3)).toBeUndefined();
+      expect(linkedList.get(-1)).toBeNull();
+      expect(linkedList.get(3)).toBeNull();
     });
   });
 
@@ -168,9 +168,9 @@ describe('SinglyLinkedList', () => {
       expect(linkedList.get(1)?.data).toBe(3);
     });
 
-    test('should return undefined from out-of-range index', () => {
+    test('should return null from out-of-range index', () => {
       linkedList.push(1).push(2).push(3);
-      expect(linkedList.remove(4)).toBeUndefined();
+      expect(linkedList.remove(4)).toBeNull();
     });
   });
 
