@@ -1,14 +1,14 @@
-import { LinkedListNode } from '../SinglyLinkedList';
+import { SinglyLinkedListNode } from '../SinglyLinkedList';
 
 export class SinglyLinkedList {
-  head: LinkedListNode | null = null;
+  head: SinglyLinkedListNode | null = null;
 
-  tail: LinkedListNode | null = null;
+  tail: SinglyLinkedListNode | null = null;
 
   size: number = 0;
 
   push(data: any) {
-    const newNode = new LinkedListNode(data);
+    const newNode = new SinglyLinkedListNode(data);
 
     if (this.head === null) {
       this.head = newNode;
@@ -24,7 +24,7 @@ export class SinglyLinkedList {
   }
 
   unshift(data: any) {
-    const newNode = new LinkedListNode(data);
+    const newNode = new SinglyLinkedListNode(data);
 
     if (this.head === null) {
       this.head = newNode;
@@ -104,7 +104,7 @@ export class SinglyLinkedList {
     if (index < 0 || index > this.size) return false;
 
     const temp = this.get(index - 1);
-    const newNode = new LinkedListNode(value);
+    const newNode = new SinglyLinkedListNode(value);
 
     newNode.next = temp!.next;
     temp!.next = newNode;
