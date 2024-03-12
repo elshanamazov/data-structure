@@ -101,4 +101,33 @@ describe('DoublyLinkedList', () => {
       expect(doublyLinkedList.size).toBe(2);
     });
   });
+
+  describe('get', () => {
+    test('should return null from empty DLL', () => {
+      expect(doublyLinkedList.get(0)).toBeNull();
+    });
+
+    test('should return null when out-of-range DLL', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      expect(doublyLinkedList.get(3)).toBeNull();
+    });
+
+    test('should return index of node from DLL', () => {
+      doublyLinkedList.push(1).push(2).push(3).push(4);
+      expect(doublyLinkedList.get(1)?.data).toBe(2);
+    });
+  });
+
+  describe('set', () => {
+    test('should set value node by index and return true', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      expect(doublyLinkedList.set(1, 4)).toBeTrue();
+      expect(doublyLinkedList.get(1)?.data).toBe(4);
+    });
+
+    test('should return false when out-of-range', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      expect(doublyLinkedList.set(5, 3)).toBeFalse();
+    });
+  });
 });

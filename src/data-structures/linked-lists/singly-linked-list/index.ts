@@ -119,10 +119,10 @@ export class SinglyLinkedList {
     if (index < 0 || index > this.size - 1) return null;
 
     const before = this.get(index - 1);
-    let toDeleteNode = before!.next;
+    const toDeleteNode = before!.next;
 
     before!.next = before!.next!.next;
-    toDeleteNode = null;
+    toDeleteNode!.next = null;
     this.size -= 1;
 
     return toDeleteNode;

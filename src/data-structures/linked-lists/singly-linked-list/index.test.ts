@@ -128,6 +128,7 @@ describe('SinglyLinkedList', () => {
     test('should set value node by index', () => {
       linkedList.push(1).push(2).push(3);
       expect(linkedList.set(1, 4)).toBeTrue();
+      expect(linkedList.get(1)?.data).toBe(4);
     });
 
     test('should set value node by index for out-of-range', () => {
