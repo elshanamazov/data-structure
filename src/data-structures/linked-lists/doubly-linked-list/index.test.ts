@@ -130,4 +130,32 @@ describe('DoublyLinkedList', () => {
       expect(doublyLinkedList.set(5, 3)).toBeFalse();
     });
   });
+
+  describe('insert', () => {
+    test('should insert a new node into the DLL', () => {
+      doublyLinkedList.push(1).push(2).push(3).push(4);
+
+      expect(doublyLinkedList.insert(1, 5)).toBeTrue();
+      expect(doublyLinkedList.get(0)?.data).toBe(1);
+      expect(doublyLinkedList.get(1)?.data).toBe(5);
+      expect(doublyLinkedList.get(1)?.prev?.data).toBe(1);
+      expect(doublyLinkedList.get(2)?.data).toBe(2);
+      expect(doublyLinkedList.get(2)?.prev?.data).toBe(5);
+      expect(doublyLinkedList.size).toBe(5);
+    });
+
+    test('should insert a new node into the empty DLL', () => {
+      doublyLinkedList.insert(0, 1);
+
+      expect(doublyLinkedList.size).toBe(1);
+      expect(doublyLinkedList.head?.data).toBe(1);
+      expect(doublyLinkedList.tail?.data).toBe(1);
+      expect(doublyLinkedList.head).toEqual(doublyLinkedList.tail);
+    });
+
+    test('should handle inserting a new node out-of-range DLL', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      expect(doublyLinkedList.insert(4, 5)).toBeFalse();
+    });
+  });
 });

@@ -99,4 +99,21 @@ export class DoublyLinkedList {
 
     return false;
   }
+
+  insert(index: number, data: any) {
+    if (index === 0) return this.unshift(data);
+    if (index === this.size) return this.push(data);
+    if (index < 0 || index > this.size) return false;
+
+    const newNode = new DoublyLinkedListNode(data);
+    const before = this.get(index - 1);
+    const after = before!.next;
+    before!.next = newNode;
+    newNode.prev = before;
+    newNode.next = after;
+    after!.prev = newNode;
+    this.size += 1;
+
+    return true;
+  }
 }
