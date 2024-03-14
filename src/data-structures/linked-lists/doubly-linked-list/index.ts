@@ -116,4 +116,19 @@ export class DoublyLinkedList {
 
     return true;
   }
+
+  remove(index: number) {
+    if (index === 0) return this.shift();
+    if (index === this.size - 1) return this.pop();
+    if (index < 0 || index >= this.size) return null;
+
+    const temp = this.get(index);
+    if (!temp) return null;
+
+    if (temp.prev) temp.prev.next = temp.next;
+    if (temp.next) temp.next.prev = temp.prev;
+
+    this.size -= 1;
+    return temp;
+  }
 }

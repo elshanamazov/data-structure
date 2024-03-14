@@ -158,4 +158,48 @@ describe('DoublyLinkedList', () => {
       expect(doublyLinkedList.insert(4, 5)).toBeFalse();
     });
   });
+
+  describe('remove', () => {
+    test('should remove node by index from the DLL ', () => {
+      doublyLinkedList.push(1).push(2).push(3).push(4);
+      doublyLinkedList.remove(2);
+
+      expect(doublyLinkedList.get(1)?.next?.data).toBe(4);
+      expect(doublyLinkedList.get(2)?.prev?.data).toBe(2);
+      expect(doublyLinkedList.get(2)?.data).toBe(4);
+      expect(doublyLinkedList.size).toBe(3);
+    });
+
+    test('should return null from out-of-range', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      expect(doublyLinkedList.remove(6)).toBeNull();
+    });
+
+    test('should return null from DLL with only node', () => {
+      doublyLinkedList.push(1).remove(0);
+      expect(doublyLinkedList.head).toBeNull();
+      expect(doublyLinkedList.tail).toBeNull();
+      expect(doublyLinkedList.size).toBe(0);
+    });
+
+    test('should remove the first node from the DLL correctly', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      const removedNode = doublyLinkedList.remove(0);
+
+      expect(removedNode?.data).toBe(1);
+      expect(doublyLinkedList.head?.data).toBe(2);
+      expect(doublyLinkedList.head?.prev).toBeNull();
+      expect(doublyLinkedList.size).toBe(2);
+    });
+
+    test('should remove the last node from the DLL correctly', () => {
+      doublyLinkedList.push(1).push(2).push(3);
+      const removedNode = doublyLinkedList.remove(2);
+
+      expect(removedNode?.data).toBe(3);
+      expect(doublyLinkedList.tail?.data).toBe(2);
+      expect(doublyLinkedList.tail?.next).toBeNull();
+      expect(doublyLinkedList.size).toBe(2);
+    });
+  });
 });
