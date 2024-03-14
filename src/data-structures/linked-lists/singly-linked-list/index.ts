@@ -1,14 +1,14 @@
-import { LinkedListNode } from '../linked-list-node';
+import { SinglyLinkedListNode } from '../SinglyLinkedList';
 
 export class SinglyLinkedList {
-  head: LinkedListNode | null = null;
+  head: SinglyLinkedListNode | null = null;
 
-  tail: LinkedListNode | null = null;
+  tail: SinglyLinkedListNode | null = null;
 
   size: number = 0;
 
   push(data: any) {
-    const newNode = new LinkedListNode(data);
+    const newNode = new SinglyLinkedListNode(data);
 
     if (this.head === null) {
       this.head = newNode;
@@ -24,7 +24,7 @@ export class SinglyLinkedList {
   }
 
   unshift(data: any) {
-    const newNode = new LinkedListNode(data);
+    const newNode = new SinglyLinkedListNode(data);
 
     if (this.head === null) {
       this.head = newNode;
@@ -39,7 +39,7 @@ export class SinglyLinkedList {
   }
 
   pop() {
-    if (!this.head) return undefined;
+    if (!this.head) return null;
 
     let temp = this.head;
     let prev = this.head;
@@ -62,7 +62,7 @@ export class SinglyLinkedList {
   }
 
   shift() {
-    if (!this.head) return undefined;
+    if (!this.head) return null;
 
     const temp = this.head;
     this.head = this.head.next;
@@ -77,7 +77,7 @@ export class SinglyLinkedList {
   }
 
   get(index: number) {
-    if (index < 0 || index >= this.size) return undefined;
+    if (index < 0 || index >= this.size) return null;
     let temp = this.head;
 
     for (let i = 0; i < index; i += 1) {
@@ -104,7 +104,7 @@ export class SinglyLinkedList {
     if (index < 0 || index > this.size) return false;
 
     const temp = this.get(index - 1);
-    const newNode = new LinkedListNode(value);
+    const newNode = new SinglyLinkedListNode(value);
 
     newNode.next = temp!.next;
     temp!.next = newNode;
@@ -116,13 +116,13 @@ export class SinglyLinkedList {
   remove(index: number) {
     if (index === 0) return this.shift();
     if (index === this.size - 1) return this.pop();
-    if (index < 0 || index > this.size - 1) return undefined;
+    if (index < 0 || index > this.size - 1) return null;
 
     const before = this.get(index - 1);
-    let toDeleteNode = before!.next;
+    const toDeleteNode = before!.next;
 
     before!.next = before!.next!.next;
-    toDeleteNode = null;
+    toDeleteNode!.next = null;
     this.size -= 1;
 
     return toDeleteNode;
