@@ -1,14 +1,14 @@
 import { SinglyLinkedListNode } from '../SinglyLinkedList';
 
-export class SinglyLinkedList {
-  head: SinglyLinkedListNode | null = null;
+export class SinglyLinkedList<T> {
+  head: SinglyLinkedListNode<T> | null = null;
 
-  tail: SinglyLinkedListNode | null = null;
+  tail: SinglyLinkedListNode<T> | null = null;
 
   size: number = 0;
 
-  push(data: any) {
-    const newNode = new SinglyLinkedListNode(data);
+  push(data: T): SinglyLinkedList<T> {
+    const newNode = new SinglyLinkedListNode<T>(data);
 
     if (this.head === null) {
       this.head = newNode;
@@ -23,8 +23,8 @@ export class SinglyLinkedList {
     return this;
   }
 
-  unshift(data: any) {
-    const newNode = new SinglyLinkedListNode(data);
+  unshift(data: T): SinglyLinkedList<T> | null {
+    const newNode = new SinglyLinkedListNode<T>(data);
 
     if (this.head === null) {
       this.head = newNode;
@@ -38,7 +38,7 @@ export class SinglyLinkedList {
     return this;
   }
 
-  pop() {
+  pop(): SinglyLinkedListNode<T> | null {
     if (!this.head) return null;
 
     let temp = this.head;
@@ -61,7 +61,7 @@ export class SinglyLinkedList {
     return temp;
   }
 
-  shift() {
+  shift(): SinglyLinkedListNode<T> | null {
     if (!this.head) return null;
 
     const temp = this.head;
@@ -76,7 +76,7 @@ export class SinglyLinkedList {
     return temp;
   }
 
-  get(index: number) {
+  get(index: number): SinglyLinkedListNode<T> | null {
     if (index < 0 || index >= this.size) return null;
     let temp = this.head;
 
@@ -87,7 +87,7 @@ export class SinglyLinkedList {
     return temp;
   }
 
-  set(index: number, newData: any) {
+  set(index: number, newData: T): boolean {
     const temp = this.get(index);
 
     if (temp) {
@@ -98,13 +98,23 @@ export class SinglyLinkedList {
     return false;
   }
 
-  insert(index: number, value: any) {
-    if (index === 0) return this.unshift(value);
-    if (index === this.size) return this.push(value);
-    if (index < 0 || index > this.size) return false;
+  insert(index: number, value: T): boolean {
+    if (index < 0 || index > this.size) {
+      return false;
+    }
+
+    if (index === 0) {
+      this.unshift(value);
+      return true;
+    }
+
+    if (index === this.size) {
+      this.push(value);
+      return true;
+    }
 
     const temp = this.get(index - 1);
-    const newNode = new SinglyLinkedListNode(value);
+    const newNode = new SinglyLinkedListNode<T>(value);
 
     newNode.next = temp!.next;
     temp!.next = newNode;
@@ -128,7 +138,7 @@ export class SinglyLinkedList {
     return toDeleteNode;
   }
 
-  reverse() {
+  reverse(): SinglyLinkedList<T> {
     let temp = this.head;
     this.head = this.tail;
     this.tail = temp;

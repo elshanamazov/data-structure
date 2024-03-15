@@ -1,14 +1,14 @@
 import { DoublyLinkedListNode } from '../DoublyLinkedList';
 
-export class DoublyLinkedList {
-  head: DoublyLinkedListNode | null = null;
+export class DoublyLinkedList<T> {
+  head: DoublyLinkedListNode<T> | null = null;
 
-  tail: DoublyLinkedListNode | null = null;
+  tail: DoublyLinkedListNode<T> | null = null;
 
   size: number = 0;
 
-  push(data: any) {
-    const newNode = new DoublyLinkedListNode(data);
+  push(data: T): DoublyLinkedList<T> {
+    const newNode = new DoublyLinkedListNode<T>(data);
 
     if (!this.head) {
       this.head = newNode;
@@ -23,7 +23,7 @@ export class DoublyLinkedList {
     return this;
   }
 
-  pop() {
+  pop(): DoublyLinkedListNode<T> | null {
     if (!this.head) return null;
     const temp = this.tail;
     if (this.size === 1) {
@@ -39,8 +39,8 @@ export class DoublyLinkedList {
     return temp;
   }
 
-  unshift(data: any) {
-    const newNode = new DoublyLinkedListNode(data);
+  unshift(data: T): DoublyLinkedList<T> {
+    const newNode = new DoublyLinkedListNode<T>(data);
 
     if (this.size === 0) {
       this.head = newNode;
@@ -56,7 +56,7 @@ export class DoublyLinkedList {
     return this;
   }
 
-  shift() {
+  shift(): DoublyLinkedListNode<T> | null {
     if (!this.head) return null;
     const temp = this.head;
 
@@ -64,7 +64,7 @@ export class DoublyLinkedList {
       this.head = null;
       this.tail = null;
     } else {
-      this.head = this.head?.next;
+      this.head = this.head?.next as DoublyLinkedListNode<T> | null;
       this.head!.prev = null;
       temp.next = null;
     }
@@ -73,12 +73,12 @@ export class DoublyLinkedList {
     return temp;
   }
 
-  get(index: number) {
+  get(index: number): DoublyLinkedListNode<T> | null {
     if (index < 0 || index >= this.size) return null;
-    let temp = this.head;
+    let temp: DoublyLinkedListNode<T> | null = this.head;
     if (index < this.size / 2) {
       for (let i = 0; i < index; i += 1) {
-        temp = temp!.next;
+        temp = temp!.next as DoublyLinkedListNode<T> | null;
       }
     } else {
       temp = this.tail;
@@ -90,7 +90,7 @@ export class DoublyLinkedList {
     return temp;
   }
 
-  set(index: number, data: any) {
+  set(index: number, data: T): boolean {
     const temp = this.get(index);
     if (temp) {
       temp.data = data;
@@ -100,14 +100,20 @@ export class DoublyLinkedList {
     return false;
   }
 
-  insert(index: number, data: any) {
-    if (index === 0) return this.unshift(data);
-    if (index === this.size) return this.push(data);
+  insert(index: number, data: T): boolean {
+    if (index === 0) {
+      this.unshift(data);
+      return true;
+    }
+    if (index === this.size) {
+      this.push(data);
+      return true;
+    }
     if (index < 0 || index > this.size) return false;
 
     const newNode = new DoublyLinkedListNode(data);
     const before = this.get(index - 1);
-    const after = before!.next;
+    const after = before!.next as DoublyLinkedListNode<T> | null;
     before!.next = newNode;
     newNode.prev = before;
     newNode.next = after;
@@ -117,7 +123,7 @@ export class DoublyLinkedList {
     return true;
   }
 
-  remove(index: number) {
+  remove(index: number): DoublyLinkedListNode<T> | null {
     if (index === 0) return this.shift();
     if (index === this.size - 1) return this.pop();
     if (index < 0 || index >= this.size) return null;
@@ -126,7 +132,7 @@ export class DoublyLinkedList {
     if (!temp) return null;
 
     if (temp.prev) temp.prev.next = temp.next;
-    if (temp.next) temp.next.prev = temp.prev;
+    if (temp.next) (temp.next as DoublyLinkedListNode<T>).prev = temp.prev;
 
     this.size -= 1;
     return temp;
