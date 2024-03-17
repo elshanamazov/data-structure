@@ -3,10 +3,10 @@ import { beforeEach, describe, expect, test } from 'bun:test';
 import { DoublyLinkedList } from './index';
 
 describe('DoublyLinkedList', () => {
-  let doublyLinkedList: DoublyLinkedList;
+  let doublyLinkedList: DoublyLinkedList<number>;
 
   beforeEach(() => {
-    doublyLinkedList = new DoublyLinkedList();
+    doublyLinkedList = new DoublyLinkedList<number>();
   });
 
   test('should create doubly linked list', () => {
