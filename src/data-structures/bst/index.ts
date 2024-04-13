@@ -12,6 +12,7 @@ export class BST<T> {
     }
     let temp = this.root;
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (newNode.data === temp.data) return undefined;
       if (newNode.data < temp.data) {
@@ -28,5 +29,23 @@ export class BST<T> {
         temp = temp.right;
       }
     }
+  }
+
+  contains(data: T) {
+    if (this.root === null) return false;
+
+    let temp = this.root;
+
+    while (temp) {
+      if (data < temp.data) {
+        temp = temp.left as BSTNode<T>;
+      } else if (data > temp.data) {
+        temp = temp.right as BSTNode<T>;
+      } else {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
