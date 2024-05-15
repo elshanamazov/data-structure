@@ -14,7 +14,7 @@ export class HashTable {
     return hash;
   }
 
-  set(key: string, value: number) {
+  set(key: string, value: number): this {
     const index = this.hash(key);
 
     if (!this.dataMap[index]) {
@@ -24,7 +24,7 @@ export class HashTable {
     return this;
   }
 
-  get(key: string) {
+  get(key: string): number | undefined {
     const index = this.hash(key);
     if (this.dataMap[index]) {
       for (let i = 0; i < this.dataMap[index].length; i += 1) {
@@ -35,5 +35,18 @@ export class HashTable {
     }
 
     return undefined;
+  }
+
+  keys(): string[] {
+    const allKeys: string[] = [];
+    for (let i = 0; i < this.dataMap.length; i += 1) {
+      if (this.dataMap[i]) {
+        for (let j = 0; j < this.dataMap[i].length; j += 1) {
+          allKeys.push(this.dataMap[i][j][0]);
+        }
+      }
+    }
+
+    return allKeys;
   }
 }

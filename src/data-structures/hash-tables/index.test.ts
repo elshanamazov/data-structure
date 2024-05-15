@@ -34,4 +34,18 @@ describe('Hash-Table', () => {
       expect(HT.get('skates')).toBeUndefined();
     });
   });
+
+  describe('keys method', () => {
+    test('should return arr of keys', () => {
+      HT.set('bolts', 1400).set('washers', 20).set('lumbers', 54);
+      expect(HT.keys()).toEqual(
+        expect.arrayContaining(['bolts', 'washers', 'lumbers']),
+      );
+    });
+
+    test('should return an empty array if no keys are set', () => {
+      const keys = HT.keys();
+      expect(keys).toEqual([]);
+    });
+  });
 });
