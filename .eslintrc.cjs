@@ -6,5 +6,6 @@ module.exports = {
   rules: {
     'no-console': 2,
     'import/prefer-default-export': 0,
+    'object-curly-newline': 'off',
   },
 };
