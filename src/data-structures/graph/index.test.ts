@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from 'bun:test';
 import { Graph } from '.';
 
-describe('Graph', () => {
+describe('Graph init and vertex method', () => {
   let graph: Graph<number>;
 
   beforeEach(() => {
@@ -21,5 +21,17 @@ describe('Graph', () => {
     expect(graph.getAdjacencyList().vertex.length).toBe(0);
     const secondAddResult = graph.addVertex('vertex');
     expect(secondAddResult).toBe(false);
+  });
+
+  describe('add edge method', () => {
+    test('should return true after add edges', () => {
+      graph.addVertex('A');
+      graph.addVertex('B');
+      graph.addEdge('A', 'B');
+      expect(graph.getAdjacencyList().A).toContain('B');
+      expect(graph.getAdjacencyList().B).toContain('A');
+      expect(graph.addEdge('A', 'B')).toBe(true);
+      expect(graph.addEdge('B', 'A')).toBe(true);
+    });
   });
 });
