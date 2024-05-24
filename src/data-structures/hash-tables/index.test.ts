@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 import { beforeEach, describe, expect, test } from 'bun:test';
 import { HashTable } from '.';
 
