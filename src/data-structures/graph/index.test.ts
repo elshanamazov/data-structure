@@ -2,10 +2,10 @@ import { beforeEach, describe, expect, test } from 'bun:test';
 import { Graph } from '.';
 
 describe('Graph init and vertex method', () => {
-  let graph: Graph<number>;
+  let graph: Graph<string>;
 
   beforeEach(() => {
-    graph = new Graph<number>();
+    graph = new Graph<string>();
   });
 
   test('should initialize graph with an empty list', () => {
@@ -43,7 +43,7 @@ describe('Graph init and vertex method', () => {
   });
 
   describe('remove edge method', () => {
-    test('should return remove edges', () => {
+    test('should remove edges', () => {
       graph.addVertex('A');
       graph.addVertex('B');
       graph.addVertex('C');
@@ -60,6 +60,43 @@ describe('Graph init and vertex method', () => {
       expect(graph.getAdjacencyList().A).not.toContain('B');
       expect(graph.getAdjacencyList().B).not.toContain('A');
       expect(graph.removeEdge('A', 'D')).toBe(false);
+    });
+  });
+
+  describe('remove vertex method', () => {
+    test('should remove vertex', () => {
+      graph.addVertex('A');
+      graph.addVertex('B');
+      graph.addVertex('C');
+      graph.addVertex('D');
+
+      expect(graph.addEdge('A', 'B')).toBe(true);
+      expect(graph.addEdge('A', 'C')).toBe(true);
+      expect(graph.addEdge('B', 'D')).toBe(true);
+      expect(graph.addEdge('C', 'D')).toBe(true);
+
+      expect(graph.getAdjacencyList().A).toContain('B');
+      expect(graph.getAdjacencyList().A).toContain('C');
+
+      expect(graph.getAdjacencyList().B).toContain('A');
+      expect(graph.getAdjacencyList().B).toContain('D');
+
+      expect(graph.getAdjacencyList().C).toContain('A');
+      expect(graph.getAdjacencyList().C).toContain('D');
+
+      expect(graph.getAdjacencyList().D).toContain('B');
+      expect(graph.getAdjacencyList().D).toContain('C');
+
+      graph.removeVertex('A');
+      expect(graph.getAdjacencyList().A).toBeUndefined();
+      expect(graph.getAdjacencyList().B).not.toContain('A');
+      expect(graph.getAdjacencyList().C).not.toContain('A');
+      expect(graph.getAdjacencyList().D).not.toContain('A');
+
+      expect(graph.getAdjacencyList().B).toContain('D');
+      expect(graph.getAdjacencyList().C).toContain('D');
+      expect(graph.getAdjacencyList().D).toContain('B');
+      expect(graph.getAdjacencyList().D).toContain('C');
     });
   });
 });

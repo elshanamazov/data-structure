@@ -1,11 +1,11 @@
 export class Graph<T> {
-  private adjacencyList: { [key: string]: T[] };
+  private adjacencyList: { [key: string]: string[] };
 
   constructor() {
     this.adjacencyList = {};
   }
 
-  getAdjacencyList(): { [key: string]: T[] } {
+  getAdjacencyList(): { [key: string]: string[] } {
     return this.adjacencyList;
   }
 
@@ -20,8 +20,8 @@ export class Graph<T> {
 
   addEdge(vertex1: string, vertex2: string): boolean {
     if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
-      this.adjacencyList[vertex1].push(vertex2 as T);
-      this.adjacencyList[vertex2].push(vertex1 as T);
+      this.adjacencyList[vertex1].push(vertex2);
+      this.adjacencyList[vertex2].push(vertex1);
       return true;
     }
     return false;
@@ -39,5 +39,19 @@ export class Graph<T> {
       return true;
     }
     return false;
+  }
+
+  removeVertex(vertex: string): Graph<T> | undefined {
+    if (!this.adjacencyList[vertex]) return undefined;
+    while (this.adjacencyList[vertex].length) {
+      const temp = this.adjacencyList[vertex].pop();
+
+      if (temp) {
+        this.removeEdge(vertex, temp);
+      }
+    }
+
+    delete this.adjacencyList[vertex];
+    return this;
   }
 }
