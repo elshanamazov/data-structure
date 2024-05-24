@@ -33,5 +33,33 @@ describe('Graph init and vertex method', () => {
       expect(graph.addEdge('A', 'B')).toBe(true);
       expect(graph.addEdge('B', 'A')).toBe(true);
     });
+
+    test('should return false with a non-existent', () => {
+      graph.addVertex('A');
+      graph.addVertex('B');
+      graph.addEdge('A', 'B');
+      expect(graph.addEdge('A', 'C')).toBe(false);
+    });
+  });
+
+  describe('remove edge method', () => {
+    test('should return remove edges', () => {
+      graph.addVertex('A');
+      graph.addVertex('B');
+      graph.addVertex('C');
+
+      expect(graph.addEdge('A', 'B')).toBe(true);
+      expect(graph.addEdge('B', 'C')).toBe(true);
+      expect(graph.addEdge('C', 'A')).toBe(true);
+
+      expect(graph.getAdjacencyList().A).toContain('B');
+      expect(graph.getAdjacencyList().B).toContain('C');
+      expect(graph.getAdjacencyList().C).toContain('A');
+
+      expect(graph.removeEdge('A', 'B')).toBe(true);
+      expect(graph.getAdjacencyList().A).not.toContain('B');
+      expect(graph.getAdjacencyList().B).not.toContain('A');
+      expect(graph.removeEdge('A', 'D')).toBe(false);
+    });
   });
 });
