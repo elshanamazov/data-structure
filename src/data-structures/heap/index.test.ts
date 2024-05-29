@@ -27,4 +27,33 @@ describe('Heap init', () => {
       expect(heap.getHeap()).toEqual(newExpectedHeap);
     });
   });
+
+  describe('remove method', () => {
+    test('remove from empty heap should return null', () => {
+      expect(heap.remove()).toBeNull();
+    });
+
+    test('remove the only element from the heap', () => {
+      heap.insert(88);
+      expect(heap.remove()).toBe(88);
+      expect(heap.getHeap()).toEqual([]);
+      expect(heap.remove()).toBeNull();
+    });
+
+    test('should remove values from heap', () => {
+      heap.insert(95);
+      heap.insert(75);
+      heap.insert(80);
+      heap.insert(55);
+      heap.insert(60);
+      heap.insert(50);
+      heap.insert(65);
+      heap.insert(100);
+      expect(heap.remove()).toBe(100);
+      expect(heap.getHeap()).toEqual([95, 75, 80, 55, 60, 50, 65]);
+
+      expect(heap.remove()).toBe(95);
+      expect(heap.getHeap()).toEqual([80, 75, 65, 55, 60, 50]);
+    });
+  });
 });

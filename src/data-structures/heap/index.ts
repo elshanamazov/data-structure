@@ -15,13 +15,46 @@ export class Heap {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  private leftChild(index: number): number {
+  remove() {
+    if (this.heap.length === 0) return null;
+    if (this.heap.length === 1) return this.heap.pop();
+    const maxValue = this.heap[0];
+    this.heap[0] = this.heap.pop()!;
+    this.sinkDown(0);
+
+    return maxValue;
+  }
+
+  private sinkDown(startIndex: number) {
+    let index = startIndex;
+    let maxIndex = index;
+    const size = this.heap.length;
+
+    while (true) {
+      const leftIndex = Heap.leftChild(index);
+      const rightIndex = Heap.rightChild(index);
+      if (leftIndex < size && this.heap[leftIndex] > this.heap[rightIndex]) {
+        maxIndex = leftIndex;
+      }
+
+      if (rightIndex < size && this.heap[rightIndex] > this.heap[maxIndex]) {
+        maxIndex = rightIndex;
+      }
+
+      if (maxIndex !== index) {
+        this.swap(index, maxIndex);
+        index = maxIndex;
+      } else {
+        return;
+      }
+    }
+  }
+
+  private static leftChild(index: number): number {
     return 2 * index + 1;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  private rightChild(index: number): number {
+  private static rightChild(index: number): number {
     return 2 * index + 2;
   }
 
