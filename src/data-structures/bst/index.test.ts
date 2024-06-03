@@ -55,4 +55,54 @@ describe('Binary Search Tree', () => {
       expect(binarySearchTree.contains(100)).toBe(false);
     });
   });
+
+  describe('delete', () => {
+    test('should delete a leaf node', () => {
+      binarySearchTree.insert(10)?.insert(5)?.insert(15)?.insert(3);
+      binarySearchTree.delete(3);
+
+      expect(binarySearchTree.contains(3)).toBe(false);
+      expect(binarySearchTree.root?.left?.left).toBeNull();
+    });
+
+    test('should delete a node with one child', () => {
+      // eslint-disable-next-line newline-per-chained-call
+      binarySearchTree.insert(10)?.insert(5)?.insert(15)?.insert(3)?.insert(4);
+      binarySearchTree.delete(3);
+
+      expect(binarySearchTree.contains(3)).toBe(false);
+      expect(binarySearchTree.root?.left?.left?.data).toBe(4);
+    });
+
+    test('should delete a node with two children', () => {
+      binarySearchTree
+        .insert(10)
+        ?.insert(5)
+        ?.insert(15)
+        ?.insert(3)
+        ?.insert(7)
+        ?.insert(6)
+        ?.insert(8);
+      binarySearchTree.delete(5);
+
+      expect(binarySearchTree.contains(5)).toBe(false);
+      expect(binarySearchTree.root?.left?.data).toBe(6);
+      expect(binarySearchTree.root?.left?.right?.data).toBe(7);
+      expect(binarySearchTree.root?.left?.right?.left).toBeNull();
+    });
+
+    test('should delete the root node', () => {
+      binarySearchTree.insert(10)?.insert(5)?.insert(15);
+      binarySearchTree.delete(10);
+
+      expect(binarySearchTree.contains(10)).toBe(false);
+      expect(binarySearchTree.root?.data).toBe(15);
+      expect(binarySearchTree.root?.left?.data).toBe(5);
+    });
+
+    test('should handle deletion from an empty tree', () => {
+      binarySearchTree.delete(10);
+      expect(binarySearchTree.root).toBeNull();
+    });
+  });
 });
